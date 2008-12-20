@@ -1,0 +1,32 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.55.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 150564d89188a81b640517ae8721c7579867595a MANIFEST
+SHA1 97e90f64a4deddd38e7726164bbb63012916d254 MANIFEST.SKIP
+SHA1 b930258af50bbd48dd4b0b3e72cf033e531c530c META.yml
+SHA1 226a52f43e8d7863892a0184a409a10d640011bd Makefile.PL
+SHA1 6a324aacd5d27b9236a6e50ff4929340094665fc lib/KiokuX/User.pm
+SHA1 44b2939f3fc5a7ffc281490d0d7bbcaac97e3a0d lib/KiokuX/User/ID.pm
+SHA1 8e34c25917627767532c2a43e95383707bf1d4b9 lib/KiokuX/User/Password.pm
+SHA1 bbb7a116339e13e2919dd1bad34c181f3b5a4772 lib/KiokuX/User/Util.pm
+SHA1 d1696c24eb72f9e03a961f9bb2daf26f50b00697 t/basic.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.7 (Darwin)
+
+iD8DBQFJTXU7VCwRwOvSdBgRAqFhAJ9AMeZa09g54bJJExNzTwyFrKouhgCgtlUQ
+TW3WUWqrwlgZZx8vi3dcsyk=
+=CYxb
+-----END PGP SIGNATURE-----
