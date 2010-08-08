@@ -1,24 +1,41 @@
 #!/usr/bin/perl
 
 package KiokuX::User::Password;
-use Moose::Role;
+use MooseX::Role::Parameterized;
 
 use MooseX::Types::Authen::Passphrase qw(Passphrase);
 
+use KiokuX::User::Util qw(crypt_password);
+
 use namespace::clean -except => 'meta';
 
-has password => (
-    isa      => Passphrase,
-    is       => 'rw',
-    coerce   => 1,
-	required => 1,
-    #handles => { check_password => "match" },
+parameter password_attribute => (
+    isa     => 'Str',
+    default => 'password',
 );
 
-sub check_password {
-    my $self = shift;
-    $self->password->match(@_);
-}
+role {
+    my ($p) = @_;
+    my $pw_attr = $p->password_attribute;
+
+    has $pw_attr => (
+        isa      => Passphrase,
+        is       => 'rw',
+        coerce   => 1,
+        required => 1,
+        #handles => { check_password => "match" },
+    );
+
+    method check_password => sub {
+        my $self = shift;
+        $self->$pw_attr->match(@_);
+    };
+
+    method set_password => sub {
+        my ( $self, @args ) = @_;
+        $self->$pw_attr( crypt_password(@args) );
+    };
+};
 
 __PACKAGE__
 
@@ -28,11 +45,11 @@ __END__
 
 =head1 NAME
 
-KiokuX::User::Password - A role for users 
+KiokuX::User::Password - A role for users with a password attribute
 
 =head1 SYNOPSIS
 
-	with qw(KiokuX::User::Password);
+    with qw(KiokuX::User::Password);
 
 =head1 DESCRIPTION
 
@@ -62,4 +79,5 @@ This is a required, read-write attribute.
 
 =cut
 
+# ex: set sw=4 et:
 
